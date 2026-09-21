@@ -9,7 +9,7 @@ Site institucional estático publicado automaticamente no GitHub Pages.
 3. Em **Custom domain**, informe `ieadsan.com.br`.
 4. Ative **Enforce HTTPS** quando a opção estiver disponível.
 
-O workflow `.github/workflows/deploy-pages.yml` publica o site em todo push para `main`, por acionamento manual e diariamente às 9h17 no horário de São Paulo.
+O workflow `.github/workflows/deploy-pages.yml` publica o site em todo push para `main` e também pode ser acionado manualmente.
 
 ## Domínio
 
