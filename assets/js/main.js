@@ -30,39 +30,3 @@ const observer = new IntersectionObserver(
 
 document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
 document.querySelectorAll("[data-year]").forEach((element) => (element.textContent = new Date().getFullYear()));
-
-const instagramFeed = document.querySelector("[data-instagram-feed]");
-
-if (instagramFeed) {
-  fetch("assets/data/instagram.json", { cache: "no-store" })
-    .then((response) => {
-      if (!response.ok) throw new Error("Feed indisponível");
-      return response.json();
-    })
-    .then(({ posts = [] }) => {
-      if (!posts.length) return;
-
-      instagramFeed.replaceChildren(
-        ...posts.map((post) => {
-          const link = document.createElement("a");
-          link.className = "instagram-post";
-          link.href = post.permalink;
-          link.target = "_blank";
-          link.rel = "noreferrer";
-          link.setAttribute("aria-label", "Abrir publicação no Instagram");
-
-          const image = document.createElement("img");
-          image.src = post.imageUrl;
-          image.alt = post.caption.slice(0, 120);
-          image.loading = "lazy";
-          image.referrerPolicy = "no-referrer";
-
-          const overlay = document.createElement("span");
-          overlay.textContent = post.mediaType === "VIDEO" ? "Assistir no Instagram ↗" : "Ver no Instagram ↗";
-          link.append(image, overlay);
-          return link;
-        })
-      );
-    })
-    .catch(() => {});
-}
